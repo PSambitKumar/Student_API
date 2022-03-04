@@ -11,7 +11,7 @@ import java.util.Optional;
 
 @Controller
 @CrossOrigin("*")
-public class StudentController {
+public class StudentController{
 
     @Autowired
     StudentRepository studentRepository;
@@ -56,5 +56,14 @@ public class StudentController {
     @GetMapping("FindByName/{name}")
     public List<Student> studentByName(@PathVariable("name") String name){
        return studentRepository.findStudentByName(name);
+    }
+
+    @ResponseBody
+    @PostMapping("UpdateStudent/{id}")
+    public String updateStudent(@PathVariable("id") int id,@RequestBody Student student){
+       int sid = id;
+       student.setId(sid);
+       studentRepository.save(student);
+       return "Student Updated Successfully";
     }
 }
