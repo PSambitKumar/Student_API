@@ -5,7 +5,7 @@ import javax.persistence.*;
 @Entity
 @Table
 public class Student {
-    
+
     @Column
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
