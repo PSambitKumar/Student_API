@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @CrossOrigin("*")
@@ -36,5 +37,24 @@ public class StudentController {
     public List<Student> getAllStudent(){
         List<Student> studentList = studentRepository.findAll();
         return studentList;
+    }
+
+    @ResponseBody
+    @DeleteMapping("DeleteStudent/{id}")
+    public String deleteStudent(@PathVariable("id") int id){
+        studentRepository.deleteById(id);
+       return "Deletion Successsfully";
+    }
+
+    @ResponseBody
+    @GetMapping("FindById/{id}")
+    public Optional<Student> studentById(@PathVariable("id") int id){
+       return studentRepository.findById(id);
+    }
+
+    @ResponseBody
+    @GetMapping("FindByName/{name}")
+    public List<Student> studentByName(@PathVariable("name") String name){
+       return studentRepository.findStudentByName(name);
     }
 }
