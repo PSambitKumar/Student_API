@@ -64,6 +64,6 @@ public class StudentController{
        int sid = id;
        student.setId(sid);
        studentRepository.save(student);
-       return "Student Updated Successfully";
+        return "Student Updated Successfully";
     }
 }
