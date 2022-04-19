@@ -1,13 +1,11 @@
 package com.csm.Controller;
 
-import com.csm.Entity.GepNIC;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 
-
-
+import javax.xml.bind.JAXBException;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -18,7 +16,7 @@ import java.net.URLConnection;
 public class SOAPController {
 
     @GetMapping(value = "/checkGepNIC/{gepNIC}")
-    public String checkGepNIC(@PathVariable("gepNIC")String gepNIC)throws MalformedURLException, IOException {
+    public String checkGepNIC(@PathVariable("gepNIC")String gepNIC) throws MalformedURLException, IOException, JAXBException {
         System.out.println(gepNIC);
         String copyGepNIC = gepNIC;
         if (copyGepNIC.length() != 15)
@@ -68,6 +66,7 @@ public class SOAPController {
 
         outputStream = httpConn.getOutputStream();
 
+
         outputStream.write(b);
         outputStream.close();
 
@@ -77,6 +76,8 @@ public class SOAPController {
         while ((responseString = bufferedReader.readLine()) != null) {
             outputString = outputString + responseString ;
         }
+
+
         System.out.println("String : " + outputString.toString());
         if (outputString.contains("GePID Verified Successfully")){
             System.out.println("Success");
